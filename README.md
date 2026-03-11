@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # La Pura Landing Page
 
 Landing page dự án **La Pura Bình Dương** — Chủ đầu tư Tập Đoàn Phát Đạt.
@@ -100,3 +101,6 @@ Các hằng số dữ liệu ở đầu file:
 - `PRODUCTS` — sản phẩm đang mở bán + giá
 - `OVERVIEW` — bảng tổng quan dự án
 - `AMENITIES` — danh sách tiện ích
+=======
+# landing-page-rever
+>>>>>>> e616c0e6a3cb3ae3c299e55d2d60210bb38805b1
