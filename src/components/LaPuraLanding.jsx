@@ -20,6 +20,12 @@ const PRODUCTS = [
     tag: "Phổ biến",
     color: "#c8a96e",
     floorPlan: "/images/can-ho-la-pu-ra-binh-duong-1pn.jpg",
+    features: [
+      "View thành phố tầng cao",
+      "Ban công xanh thoáng đãng",
+      "Tối ưu diện tích sử dụng",
+      "Bàn giao hoàn thiện nội thất",
+    ],
   },
   {
     type: "Căn hộ 2PN 1WC",
@@ -29,6 +35,12 @@ const PRODUCTS = [
     tag: "Bán chạy",
     color: "#2e7d6b",
     floorPlan: "/images/can-ho-la-pu-ra-binh-duong-2pn-1wc.jpg",
+    features: [
+      "Phòng bếp mở liền phòng khách",
+      "Ban công view hướng Đông",
+      "Cửa kính full-height",
+      "Nội thất cao cấp bàn giao",
+    ],
   },
   {
     type: "Căn hộ 2PN 2WC",
@@ -38,6 +50,12 @@ const PRODUCTS = [
     tag: "Cao cấp",
     color: "#1a4b6e",
     floorPlan: "/images/can-ho-la-pu-ra-binh-duong-2pn-2wc.jpg",
+    features: [
+      "2 phòng tắm tiện lợi",
+      "Không gian sinh hoạt rộng rãi",
+      "Phòng ngủ master riêng biệt",
+      "Hoàn thiện nội thất cao cấp",
+    ],
   },
   {
     type: "Căn hộ Sân vườn",
@@ -47,6 +65,12 @@ const PRODUCTS = [
     tag: "Premium",
     color: "#7a3b2e",
     floorPlan: null,
+    features: [
+      "Sân vườn riêng biệt rộng lớn",
+      "Không gian sống đẳng cấp",
+      "Thiết kế độc bản limited",
+      "Hoàn thiện vật liệu premium",
+    ],
   },
 ];
 
@@ -400,7 +424,6 @@ const AMENITIES = [
   { Icon: AMENITY_ICONS.Library, label: "Thư viện cộng đồng" },
 ];
 
-// Ảnh tiện ích thực tế — đặt trong public/images/
 const AMENITY_PHOTOS = [
   {
     src: "/images/ho-boi-la-pura.jpg",
@@ -429,7 +452,6 @@ const AMENITY_PHOTOS = [
   },
 ];
 
-// Mặt bằng Zenia theo nhóm tầng
 const FLOOR_PLANS = [
   { label: "Tầng 4–10", file: "/images/mat-bang-zenia-tang-4-10.jpg" },
   { label: "Tầng 11", file: "/images/mat-bang-zenia-tang-11.jpg" },
@@ -508,6 +530,7 @@ export default function LaPuraLanding() {
   const [activeFloor, setActiveFloor] = useState(0);
   const [lightbox, setLightbox] = useState(null);
   const [activeShowroom, setActiveShowroom] = useState(0);
+  const [activeProduct, setActiveProduct] = useState(0);
 
   useZaloWidget();
 
@@ -571,7 +594,21 @@ export default function LaPuraLanding() {
         @keyframes pulse-ring { 0%{transform:scale(1);opacity:0.7} 100%{transform:scale(1.55);opacity:0} }
         .hero-float { animation:float 4s ease-in-out infinite; }
         .shimmer { background:linear-gradient(90deg,#c8a96e 25%,#f5dfa0 50%,#c8a96e 75%); background-size:200% auto; -webkit-background-clip:text; -webkit-text-fill-color:transparent; animation:shimmer 3s linear infinite; }
-        @media(max-width:768px){ .hide-mobile{display:none!important;} .col2{grid-template-columns:1fr!important;} }
+        .product-tab-btn { font-family:'Outfit',sans-serif; font-size:12px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; padding:18px 24px; cursor:pointer; border:none; transition:all 0.3s; flex:1 1 auto; max-width:280px; border-bottom:3px solid transparent; }
+        .product-tab-btn:hover { background:rgba(255,255,255,0.08) !important; color:rgba(255,255,255,0.75) !important; }
+        .product-panel-grid { display:grid; grid-template-columns:1fr 1fr; min-height:600px; }
+        .product-info-panel { padding:56px 64px; display:flex; flex-direction:column; justify-content:center; gap:26px; }
+        .product-stat-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+        .product-stat-item { background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.07); padding:14px 16px; }
+        .product-bottom-strip { padding:20px 64px; background:rgba(0,0,0,0.3); border-top:1px solid rgba(255,255,255,0.05); display:flex; gap:40px; flex-wrap:wrap; align-items:center; justify-content:space-between; }
+        @media(max-width:900px){
+          .hide-mobile{display:none!important;}
+          .col2{grid-template-columns:1fr!important;}
+          .product-panel-grid{grid-template-columns:1fr!important;}
+          .product-info-panel{padding:36px 24px!important;}
+          .product-bottom-strip{padding:16px 24px!important; gap:16px!important;}
+          .product-tab-btn{font-size:10px!important; padding:14px 12px!important;}
+        }
         .zalo-chat-widget { right: 0 !important; left: auto !important; bottom: 0 !important; }
         #zalo-chat-plugin { right: 0 !important; left: auto !important; }
         .zalo-chat-button { right: 20px !important; left: auto !important; }
@@ -771,7 +808,6 @@ export default function LaPuraLanding() {
             border: "1px solid rgba(200,169,110,0.07)",
           }}
         />
-
         <div
           style={{
             maxWidth: 960,
@@ -815,7 +851,6 @@ export default function LaPuraLanding() {
               Đang mở bán 03/2026 · Phân phối: Rever.vn
             </span>
           </div>
-
           <h1
             style={{
               fontSize: "clamp(50px,8vw,100px)",
@@ -840,7 +875,6 @@ export default function LaPuraLanding() {
           >
             Thành Phố Dưỡng Lành
           </h2>
-
           <div
             style={{
               display: "flex",
@@ -882,7 +916,6 @@ export default function LaPuraLanding() {
               </div>
             ))}
           </div>
-
           <p
             style={{
               fontFamily: "'Outfit',sans-serif",
@@ -899,7 +932,6 @@ export default function LaPuraLanding() {
             triển bởi{" "}
             <strong style={{ color: accent }}>Tập Đoàn Phát Đạt</strong>.
           </p>
-
           <div
             style={{
               display: "flex",
@@ -929,7 +961,6 @@ export default function LaPuraLanding() {
               </button>
             </a>
           </div>
-
           <div
             style={{
               position: "absolute",
@@ -1234,8 +1265,6 @@ export default function LaPuraLanding() {
               Nội thất hoàn thiện cao cấp · Bàn giao theo tiêu chuẩn
             </p>
           </AnimatedSection>
-
-          {/* Main large image */}
           <AnimatedSection>
             <div
               onClick={() =>
@@ -1343,8 +1372,6 @@ export default function LaPuraLanding() {
               </div>
             </div>
           </AnimatedSection>
-
-          {/* Thumbnails */}
           <div
             style={{
               display: "grid",
@@ -1390,79 +1417,163 @@ export default function LaPuraLanding() {
         </div>
       </section>
 
-      {/* PRODUCTS */}
-      <section id="sanpham" style={{ padding: "96px 24px", background: dark }}>
-        <div style={{ maxWidth: 1100, margin: "0 auto" }}>
+      {/* ===================== PRODUCTS - FULL WIDTH REDESIGN ===================== */}
+      <section
+        id="sanpham"
+        style={{
+          padding: "0",
+          background: dark,
+          position: "relative",
+          overflow: "hidden",
+        }}
+      >
+        {/* Decorative background */}
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            opacity: 0.025,
+            backgroundImage: `radial-gradient(${accent} 1px, transparent 1px)`,
+            backgroundSize: "32px 32px",
+          }}
+        />
+
+        <div style={{ padding: "96px 0 0", position: "relative", zIndex: 1 }}>
+          {/* Section Header */}
           <AnimatedSection>
-            <div className="divider">
-              <span
-                style={{
-                  fontFamily: "'Outfit',sans-serif",
-                  fontSize: 11,
-                  color: accent,
-                  letterSpacing: "0.25em",
-                  textTransform: "uppercase",
-                }}
-              >
-                Sản Phẩm
-              </span>
-            </div>
-            <h2
-              style={{
-                fontSize: "clamp(28px,5vw,46px)",
-                fontWeight: 300,
-                textAlign: "center",
-                marginBottom: 10,
-                color: "white",
-              }}
-            >
-              Đang Mở Bán <span style={{ color: accent }}>Tháng 03/2026</span>
-            </h2>
-            <p
-              style={{
-                fontFamily: "'Outfit',sans-serif",
-                fontSize: 14,
-                color: "rgba(255,255,255,0.4)",
-                textAlign: "center",
-                marginBottom: 52,
-                lineHeight: 1.8,
-              }}
-            >
-              Đa dạng loại hình căn hộ · Tư vấn bởi chuyên viên Rever.vn
-            </p>
-          </AnimatedSection>
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fit,minmax(240px,1fr))",
-              gap: 3,
-            }}
-          >
-            {PRODUCTS.map((p, i) => (
-              <AnimatedSection key={p.type} delay={i * 70}>
-                <div
-                  className="card-hover"
+            <div style={{ padding: "0 24px" }}>
+              <div className="divider">
+                <span
                   style={{
-                    background: "white",
-                    borderTop: `3px solid ${p.color}`,
-                    overflow: "hidden",
+                    fontFamily: "'Outfit',sans-serif",
+                    fontSize: 11,
+                    color: accent,
+                    letterSpacing: "0.25em",
+                    textTransform: "uppercase",
                   }}
                 >
-                  <div
-                    style={{ background: p.color, padding: "22px 26px 18px" }}
-                  >
+                  Sản Phẩm
+                </span>
+              </div>
+              <h2
+                style={{
+                  fontSize: "clamp(28px,5vw,46px)",
+                  fontWeight: 300,
+                  textAlign: "center",
+                  marginBottom: 10,
+                  color: "white",
+                }}
+              >
+                Đang Mở Bán <span style={{ color: accent }}>Tháng 03/2026</span>
+              </h2>
+              <p
+                style={{
+                  fontFamily: "'Outfit',sans-serif",
+                  fontSize: 14,
+                  color: "rgba(255,255,255,0.4)",
+                  textAlign: "center",
+                  marginBottom: 52,
+                  lineHeight: 1.8,
+                }}
+              >
+                Đa dạng loại hình căn hộ · Tư vấn bởi chuyên viên Rever.vn
+              </p>
+            </div>
+          </AnimatedSection>
+
+          {/* Product Type Tabs */}
+          <AnimatedSection delay={60}>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                flexWrap: "wrap",
+                borderBottom: "1px solid rgba(255,255,255,0.07)",
+              }}
+            >
+              {PRODUCTS.map((p, i) => (
+                <button
+                  key={p.type}
+                  onClick={() => setActiveProduct(i)}
+                  className="product-tab-btn"
+                  style={{
+                    background: activeProduct === i ? p.color : "transparent",
+                    color:
+                      activeProduct === i ? "#0d1f1a" : "rgba(255,255,255,0.4)",
+                    borderBottom:
+                      activeProduct === i
+                        ? `3px solid ${p.color}`
+                        : "3px solid transparent",
+                  }}
+                >
+                  {p.type}
+                  {p.tag && (
+                    <span
+                      style={{
+                        marginLeft: 7,
+                        fontSize: 9,
+                        padding: "2px 7px",
+                        background:
+                          activeProduct === i
+                            ? "rgba(0,0,0,0.2)"
+                            : "rgba(255,255,255,0.08)",
+                        color:
+                          activeProduct === i
+                            ? "#0d1f1a"
+                            : "rgba(255,255,255,0.4)",
+                        borderRadius: 2,
+                        verticalAlign: "middle",
+                        letterSpacing: "0.08em",
+                      }}
+                    >
+                      {p.tag}
+                    </span>
+                  )}
+                </button>
+              ))}
+            </div>
+          </AnimatedSection>
+
+          {/* Active Product Panels */}
+          {PRODUCTS.map((p, i) => (
+            <div
+              key={p.type}
+              style={{
+                display: activeProduct === i ? "block" : "none",
+                borderTop: `2px solid ${p.color}`,
+              }}
+            >
+              {/* Main Split Layout */}
+              <div
+                className="product-panel-grid"
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: p.floorPlan ? "1fr 1fr" : "1fr 1fr",
+                  minHeight: 620,
+                }}
+              >
+                {/* LEFT: Info Panel */}
+                <div
+                  className="product-info-panel"
+                  style={{
+                    background:
+                      "linear-gradient(145deg, rgba(255,255,255,0.03) 0%, rgba(0,0,0,0.25) 100%)",
+                  }}
+                >
+                  {/* Tag + Title */}
+                  <div>
                     <span
                       style={{
                         fontFamily: "'Outfit',sans-serif",
                         fontSize: 10,
                         fontWeight: 700,
-                        letterSpacing: "0.12em",
+                        letterSpacing: "0.18em",
                         textTransform: "uppercase",
-                        background: "rgba(0,0,0,0.2)",
-                        color: "white",
-                        padding: "4px 10px",
+                        background: p.color,
+                        color: "#0d1f1a",
+                        padding: "5px 14px",
                         display: "inline-block",
-                        marginBottom: 12,
+                        marginBottom: 18,
                       }}
                     >
                       {p.tag}
@@ -1470,111 +1581,454 @@ export default function LaPuraLanding() {
                     <h3
                       style={{
                         fontFamily: "'Cormorant Garamond',serif",
-                        fontSize: 19,
-                        fontWeight: 600,
+                        fontSize: "clamp(30px,3.5vw,52px)",
+                        fontWeight: 300,
                         color: "white",
-                        lineHeight: 1.3,
+                        lineHeight: 1.1,
+                        marginBottom: 12,
                       }}
                     >
                       {p.type}
                     </h3>
+                    <div
+                      style={{ width: 48, height: 2, background: p.color }}
+                    />
                   </div>
-                  {p.floorPlan && (
+
+                  {/* Price Block */}
+                  <div
+                    style={{
+                      background: "rgba(255,255,255,0.04)",
+                      border: `1px solid ${p.color}40`,
+                      padding: "24px 28px",
+                    }}
+                  >
                     <div
                       style={{
-                        overflow: "hidden",
-                        cursor: "zoom-in",
-                        background: "#f8f5f0",
-                        aspectRatio: "4/3",
+                        fontFamily: "'Outfit',sans-serif",
+                        fontSize: 10,
+                        color: "rgba(255,255,255,0.3)",
+                        letterSpacing: "0.15em",
+                        textTransform: "uppercase",
+                        marginBottom: 8,
                       }}
-                      onClick={() =>
-                        setLightbox({ src: p.floorPlan, label: p.type })
-                      }
                     >
-                      <img
-                        src={p.floorPlan}
-                        alt={p.type}
-                        style={{
-                          width: "100%",
-                          height: "100%",
-                          objectFit: "cover",
-                          transition: "transform 0.4s",
-                        }}
-                        onMouseEnter={(e) =>
-                          (e.currentTarget.style.transform = "scale(1.05)")
-                        }
-                        onMouseLeave={(e) =>
-                          (e.currentTarget.style.transform = "scale(1)")
-                        }
-                      />
+                      Giá bán dự kiến
                     </div>
-                  )}
-                  <div style={{ padding: "18px 26px 22px" }}>
-                    <div style={{ marginBottom: 8 }}>
-                      <div
-                        style={{
-                          fontFamily: "'Outfit',sans-serif",
-                          fontSize: 10,
-                          color: "#bbb",
-                          letterSpacing: "0.1em",
-                          textTransform: "uppercase",
-                        }}
-                      >
-                        Giá bán
-                      </div>
-                      <div
-                        style={{
-                          fontSize: 20,
-                          fontWeight: 700,
-                          color: p.color,
-                          marginTop: 2,
-                        }}
-                      >
-                        {p.price}
-                      </div>
+                    <div
+                      style={{
+                        fontSize: "clamp(26px,3vw,42px)",
+                        fontWeight: 700,
+                        color: p.color,
+                        lineHeight: 1,
+                        marginBottom: 8,
+                      }}
+                    >
+                      {p.price}
                     </div>
-                    <div style={{ marginBottom: 18 }}>
-                      <div
-                        style={{
-                          fontFamily: "'Outfit',sans-serif",
-                          fontSize: 12,
-                          color: "#777",
-                          marginTop: 2,
-                          lineHeight: 1.8,
-                        }}
+                    <div
+                      style={{
+                        fontFamily: "'Outfit',sans-serif",
+                        fontSize: 12,
+                        color: "rgba(255,255,255,0.3)",
+                        display: "flex",
+                        alignItems: "center",
+                        gap: 8,
+                      }}
+                    >
+                      <svg
+                        width="12"
+                        height="12"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
                       >
-                        {p.area}
-                      </div>
-                      {p.nsa && (
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                      </svg>
+                      Hỗ trợ vay đến 70% giá trị căn hộ · Lãi suất ưu đãi
+                    </div>
+                  </div>
+
+                  {/* Thông số kỹ thuật */}
+                  <div>
+                    <div
+                      style={{
+                        fontFamily: "'Outfit',sans-serif",
+                        fontSize: 10,
+                        color: "rgba(255,255,255,0.25)",
+                        letterSpacing: "0.15em",
+                        textTransform: "uppercase",
+                        marginBottom: 12,
+                      }}
+                    >
+                      Thông số kỹ thuật
+                    </div>
+                    <div className="product-stat-grid">
+                      {[
+                        {
+                          label: "Diện tích thông thủy (NFA)",
+                          value: p.area.replace("NFA: ", ""),
+                        },
+                        ...(p.nsa
+                          ? [
+                              {
+                                label: "Diện tích sàn thực (NSA)",
+                                value: p.nsa.replace("NSA: ", ""),
+                              },
+                            ]
+                          : [{ label: "Loại căn", value: "Đặc biệt" }]),
+                        { label: "Pháp lý", value: "Sổ hồng riêng" },
+                        { label: "Sở hữu", value: "Lâu dài" },
+                        { label: "Bàn giao", value: "Năm 2026" },
+                        { label: "Nội thất", value: "Hoàn thiện cao cấp" },
+                      ].map((item) => (
+                        <div key={item.label} className="product-stat-item">
+                          <div
+                            style={{
+                              fontFamily: "'Outfit',sans-serif",
+                              fontSize: 9,
+                              color: "rgba(255,255,255,0.28)",
+                              letterSpacing: "0.1em",
+                              textTransform: "uppercase",
+                              marginBottom: 6,
+                            }}
+                          >
+                            {item.label}
+                          </div>
+                          <div
+                            style={{
+                              fontFamily: "'Outfit',sans-serif",
+                              fontSize: 13,
+                              color: "white",
+                              fontWeight: 500,
+                            }}
+                          >
+                            {item.value}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Đặc điểm nổi bật */}
+                  <div>
+                    <div
+                      style={{
+                        fontFamily: "'Outfit',sans-serif",
+                        fontSize: 10,
+                        color: "rgba(255,255,255,0.25)",
+                        letterSpacing: "0.15em",
+                        textTransform: "uppercase",
+                        marginBottom: 14,
+                      }}
+                    >
+                      Đặc điểm nổi bật
+                    </div>
+                    <div
+                      style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        gap: 10,
+                      }}
+                    >
+                      {p.features.map((feat) => (
                         <div
+                          key={feat}
                           style={{
-                            fontFamily: "'Outfit',sans-serif",
-                            fontSize: 12,
-                            color: "#aaa",
+                            display: "flex",
+                            alignItems: "center",
+                            gap: 12,
                           }}
                         >
-                          {p.nsa}
+                          <div
+                            style={{
+                              width: 5,
+                              height: 5,
+                              borderRadius: "50%",
+                              background: p.color,
+                              flexShrink: 0,
+                            }}
+                          />
+                          <span
+                            style={{
+                              fontFamily: "'Outfit',sans-serif",
+                              fontSize: 13,
+                              color: "rgba(255,255,255,0.6)",
+                              lineHeight: 1.4,
+                            }}
+                          >
+                            {feat}
+                          </span>
                         </div>
-                      )}
+                      ))}
                     </div>
+                  </div>
+
+                  {/* CTA Buttons */}
+                  <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
                     <button
-                      className="btn-outline"
-                      style={{ borderColor: p.color, color: p.color }}
+                      className="btn-gold"
+                      style={{ flex: "1 1 auto" }}
                       onClick={() =>
                         document
                           .getElementById("lienhe")
                           .scrollIntoView({ behavior: "smooth" })
                       }
                     >
-                      Nhận Bảng Giá
+                      Nhận Bảng Giá Chi Tiết
                     </button>
+                    <a
+                      href="https://zalo.me/0877191940"
+                      target="_blank"
+                      rel="noreferrer"
+                      style={{ textDecoration: "none", flex: "1 1 auto" }}
+                    >
+                      <button
+                        className="btn-zalo"
+                        style={{ width: "100%", justifyContent: "center" }}
+                      >
+                        <SvgZalo /> Hỏi Qua Zalo
+                      </button>
+                    </a>
                   </div>
                 </div>
-              </AnimatedSection>
-            ))}
-          </div>
+
+                {/* RIGHT: Floor Plan Image or Placeholder */}
+                {p.floorPlan ? (
+                  <div
+                    onClick={() =>
+                      setLightbox({ src: p.floorPlan, label: p.type })
+                    }
+                    style={{
+                      position: "relative",
+                      cursor: "zoom-in",
+                      overflow: "hidden",
+                      background: "#f0ece6",
+                      minHeight: 480,
+                    }}
+                  >
+                    <img
+                      src={p.floorPlan}
+                      alt={p.type}
+                      style={{
+                        width: "100%",
+                        height: "100%",
+                        objectFit: "cover",
+                        display: "block",
+                        transition: "transform 0.6s",
+                      }}
+                      onMouseEnter={(e) =>
+                        (e.currentTarget.style.transform = "scale(1.04)")
+                      }
+                      onMouseLeave={(e) =>
+                        (e.currentTarget.style.transform = "scale(1)")
+                      }
+                    />
+                    <div
+                      style={{
+                        position: "absolute",
+                        inset: 0,
+                        background:
+                          "linear-gradient(to top, rgba(13,31,26,0.8) 0%, transparent 50%)",
+                      }}
+                    />
+                    <div
+                      style={{
+                        position: "absolute",
+                        bottom: 0,
+                        left: 0,
+                        right: 0,
+                        padding: "28px 32px",
+                      }}
+                    >
+                      <div
+                        style={{
+                          fontFamily: "'Outfit',sans-serif",
+                          fontSize: 10,
+                          color: p.color,
+                          letterSpacing: "0.2em",
+                          textTransform: "uppercase",
+                          marginBottom: 8,
+                        }}
+                      >
+                        Mặt bằng căn hộ
+                      </div>
+                      <div
+                        style={{
+                          fontFamily: "'Cormorant Garamond',serif",
+                          fontSize: 24,
+                          fontWeight: 600,
+                          color: "white",
+                          marginBottom: 6,
+                        }}
+                      >
+                        {p.type}
+                      </div>
+                      <div
+                        style={{
+                          fontFamily: "'Outfit',sans-serif",
+                          fontSize: 12,
+                          color: "rgba(255,255,255,0.5)",
+                          display: "flex",
+                          alignItems: "center",
+                          gap: 6,
+                        }}
+                      >
+                        <svg
+                          width="13"
+                          height="13"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                        >
+                          <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
+                        </svg>
+                        Click để phóng to xem chi tiết
+                      </div>
+                    </div>
+                    <div
+                      style={{
+                        position: "absolute",
+                        top: 20,
+                        right: 20,
+                        background: p.color,
+                        color: "#0d1f1a",
+                        fontFamily: "'Outfit',sans-serif",
+                        fontSize: 10,
+                        fontWeight: 700,
+                        letterSpacing: "0.12em",
+                        textTransform: "uppercase",
+                        padding: "6px 14px",
+                      }}
+                    >
+                      {p.tag}
+                    </div>
+                  </div>
+                ) : (
+                  /* Premium / no floor plan placeholder */
+                  <div
+                    style={{
+                      background: `linear-gradient(135deg, ${p.color}18 0%, rgba(0,0,0,0.3) 100%)`,
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      padding: 56,
+                      minHeight: 480,
+                      gap: 24,
+                      borderLeft: `1px solid ${p.color}20`,
+                    }}
+                  >
+                    <div
+                      style={{
+                        fontFamily: "'Cormorant Garamond',serif",
+                        fontSize: 100,
+                        color: `${p.color}20`,
+                        fontWeight: 700,
+                        lineHeight: 1,
+                      }}
+                    >
+                      SV
+                    </div>
+                    <div style={{ textAlign: "center" }}>
+                      <div
+                        style={{
+                          fontFamily: "'Cormorant Garamond',serif",
+                          fontSize: 28,
+                          color: "white",
+                          fontWeight: 300,
+                          marginBottom: 10,
+                        }}
+                      >
+                        Căn Hộ Sân Vườn
+                      </div>
+                      <div
+                        style={{
+                          fontFamily: "'Outfit',sans-serif",
+                          fontSize: 12,
+                          color: "rgba(255,255,255,0.3)",
+                          letterSpacing: "0.12em",
+                          lineHeight: 2,
+                        }}
+                      >
+                        Thiết kế độc bản · Limited edition
+                        <br />
+                        Liên hệ để nhận thông tin chi tiết
+                      </div>
+                    </div>
+                    <button
+                      className="btn-gold"
+                      style={{ marginTop: 8 }}
+                      onClick={() =>
+                        document
+                          .getElementById("lienhe")
+                          .scrollIntoView({ behavior: "smooth" })
+                      }
+                    >
+                      Tư Vấn Ngay
+                    </button>
+                  </div>
+                )}
+              </div>
+
+              {/* Bottom Summary Strip */}
+              <div className="product-bottom-strip">
+                <div style={{ display: "flex", gap: 40, flexWrap: "wrap" }}>
+                  {[
+                    { label: "Giá bán", value: p.price },
+                    {
+                      label: "Diện tích NFA",
+                      value: p.area.replace("NFA: ", ""),
+                    },
+                    { label: "Vay ngân hàng", value: "Tới 70%" },
+                    { label: "Pháp lý", value: "Sổ hồng riêng" },
+                    { label: "Bàn giao", value: "Năm 2026" },
+                  ].map((s) => (
+                    <div key={s.label}>
+                      <div
+                        style={{
+                          fontFamily: "'Outfit',sans-serif",
+                          fontSize: 9,
+                          color: "rgba(255,255,255,0.25)",
+                          letterSpacing: "0.14em",
+                          textTransform: "uppercase",
+                        }}
+                      >
+                        {s.label}
+                      </div>
+                      <div
+                        style={{
+                          fontFamily: "'Outfit',sans-serif",
+                          fontSize: 14,
+                          fontWeight: 600,
+                          color: p.color,
+                          marginTop: 4,
+                        }}
+                      >
+                        {s.value}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                <div
+                  style={{
+                    fontFamily: "'Outfit',sans-serif",
+                    fontSize: 11,
+                    color: "rgba(255,255,255,0.2)",
+                    fontStyle: "italic",
+                  }}
+                >
+                  {i + 1} / {PRODUCTS.length} loại sản phẩm · Phân phối bởi
+                  Rever.vn
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
       </section>
+      {/* ===================== END PRODUCTS ===================== */}
 
       {/* LIGHTBOX */}
       {lightbox && (
@@ -1689,8 +2143,6 @@ export default function LaPuraLanding() {
               Chi tiết bố trí căn hộ theo từng nhóm tầng — Click để xem phóng to
             </p>
           </AnimatedSection>
-
-          {/* Tab buttons */}
           <AnimatedSection>
             <div
               style={{
@@ -1723,8 +2175,6 @@ export default function LaPuraLanding() {
               ))}
             </div>
           </AnimatedSection>
-
-          {/* Floor plan image */}
           <AnimatedSection>
             <div
               style={{
@@ -1820,8 +2270,6 @@ export default function LaPuraLanding() {
               </div>
             </div>
           </AnimatedSection>
-
-          {/* Legend */}
           <AnimatedSection delay={100}>
             <div
               style={{
@@ -2144,8 +2592,6 @@ export default function LaPuraLanding() {
               </AnimatedSection>
             ))}
           </div>
-
-          {/* Ảnh tiện ích thực tế */}
           <AnimatedSection delay={100}>
             <h3
               style={{
@@ -2365,258 +2811,463 @@ export default function LaPuraLanding() {
       {/* CONTACT */}
       <section
         id="lienhe"
-        style={{ padding: "96px 24px", background: "white" }}
+        style={{ padding: "80px 0 0", background: "#e8f0e0" }}
       >
-        <div style={{ maxWidth: 600, margin: "0 auto" }}>
+        <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 24px" }}>
+          {/* Section title */}
           <AnimatedSection>
-            <div className="divider">
-              <span
-                style={{
-                  fontFamily: "'Outfit',sans-serif",
-                  fontSize: 11,
-                  color: accent,
-                  letterSpacing: "0.25em",
-                  textTransform: "uppercase",
-                }}
-              >
-                Đăng Ký
-              </span>
-            </div>
             <h2
               style={{
-                fontSize: "clamp(24px,5vw,40px)",
-                fontWeight: 300,
-                textAlign: "center",
-                marginBottom: 10,
-              }}
-            >
-              Nhận Thông Tin <span style={{ color: accent }}>Chi Tiết</span>
-            </h2>
-            <p
-              style={{
                 fontFamily: "'Outfit',sans-serif",
-                fontSize: 14,
-                color: "#aaa",
+                fontSize: "clamp(20px,3vw,28px)",
+                fontWeight: 800,
                 textAlign: "center",
-                marginBottom: 44,
-                lineHeight: 1.8,
+                color: "#1e5c2e",
+                letterSpacing: "0.05em",
+                textTransform: "uppercase",
+                marginBottom: 48,
               }}
             >
-              Chuyên viên <strong style={{ color: dark }}>Rever.vn</strong> sẽ
-              liên hệ qua SĐT / Zalo / Viber
-            </p>
+              NHẬN THÔNG TIN & CHIẾT KHẤU
+            </h2>
           </AnimatedSection>
 
-          {submitted ? (
+          {/* 2-col layout */}
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "1fr 1fr",
+              gap: 0,
+              background: "#e8f0e0",
+              paddingBottom: 64,
+              alignItems: "start",
+            }}
+            className="col2"
+          >
+            {/* LEFT: Thông tin liên hệ */}
             <AnimatedSection>
-              <div
-                style={{
-                  textAlign: "center",
-                  padding: "56px 32px",
-                  background: "#f8f5f0",
-                }}
-              >
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "center",
-                    marginBottom: 18,
-                  }}
-                >
-                  <SvgCheck />
-                </div>
+              <div style={{ padding: "0 48px 0 0", textAlign: "center" }}>
                 <h3
                   style={{
-                    fontSize: 20,
-                    fontWeight: 400,
-                    marginBottom: 10,
-                    color: green,
+                    fontFamily: "'Outfit',sans-serif",
+                    fontSize: 15,
+                    fontWeight: 800,
+                    color: "#1e5c2e",
+                    letterSpacing: "0.12em",
+                    textTransform: "uppercase",
+                    marginBottom: 28,
                   }}
                 >
-                  Đăng ký thành công!
+                  THÔNG TIN LIÊN HỆ
+                </h3>
+
+                {/* Logo */}
+                <div
+                  style={{
+                    display: "inline-flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    background: "white",
+                    border: "1px solid #d4e6c0",
+                    padding: "20px 32px",
+                    marginBottom: 32,
+                  }}
+                >
+                  <span
+                    style={{
+                      fontFamily: "'Cormorant Garamond',serif",
+                      fontSize: 32,
+                      fontWeight: 600,
+                      color: "#1e5c2e",
+                      letterSpacing: "0.05em",
+                    }}
+                  >
+                    La Pura
+                  </span>
+                </div>
+
+                <div
+                  style={{
+                    fontFamily: "'Outfit',sans-serif",
+                    fontSize: 14,
+                    color: "#3a5c3a",
+                    lineHeight: 2.2,
+                    textAlign: "center",
+                  }}
+                >
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "flex-start",
+                      justifyContent: "center",
+                      gap: 8,
+                      marginBottom: 4,
+                    }}
+                  >
+                    <SvgMapPin />
+                    <span>
+                      Địa chỉ: Đường Quốc Lộ 13, TP. Thuận An, Tỉnh Bình Dương
+                    </span>
+                  </div>
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      gap: 8,
+                      marginBottom: 4,
+                    }}
+                  >
+                    <SvgPhone />
+                    <span>
+                      Hotline:{" "}
+                      <a
+                        href="tel:0877191940"
+                        style={{
+                          color: "#1e5c2e",
+                          fontWeight: 700,
+                          textDecoration: "none",
+                        }}
+                      >
+                        0877 191 940
+                      </a>
+                    </span>
+                  </div>
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      gap: 8,
+                    }}
+                  >
+                    <SvgMail />
+                    <span>
+                      Email:{" "}
+                      <a
+                        href="mailto:info@rever.vn"
+                        style={{
+                          color: "#1e5c2e",
+                          fontWeight: 600,
+                          textDecoration: "none",
+                        }}
+                      >
+                        info@rever.vn
+                      </a>
+                    </span>
+                  </div>
+                </div>
+
+                <div
+                  style={{
+                    marginTop: 32,
+                    paddingTop: 24,
+                    borderTop: "1px solid #c8ddb0",
+                    fontFamily: "'Outfit',sans-serif",
+                    fontSize: 12,
+                    color: "#7a9a7a",
+                    lineHeight: 1.8,
+                  }}
+                >
+                  Chính sách bảo mật &nbsp;|&nbsp; Điều khoản sử dụng
+                  &nbsp;|&nbsp; Quy chế hoạt động
+                </div>
+              </div>
+            </AnimatedSection>
+
+            {/* Divider */}
+            <div
+              style={{
+                position: "absolute",
+                left: "50%",
+                top: 0,
+                bottom: 0,
+                width: 1,
+                background: "#c8ddb0",
+                display: "none",
+              }}
+            />
+
+            {/* RIGHT: Form */}
+            <AnimatedSection delay={80}>
+              <div style={{ borderLeft: "1px solid #c8ddb0", paddingLeft: 48 }}>
+                <h3
+                  style={{
+                    fontFamily: "'Outfit',sans-serif",
+                    fontSize: 15,
+                    fontWeight: 800,
+                    color: "#1e5c2e",
+                    letterSpacing: "0.12em",
+                    textTransform: "uppercase",
+                    marginBottom: 10,
+                  }}
+                >
+                  NHẬN THÔNG TIN & CHIẾT KHẤU
                 </h3>
                 <p
                   style={{
                     fontFamily: "'Outfit',sans-serif",
-                    fontSize: 14,
-                    color: "#777",
-                    lineHeight: 1.8,
+                    fontSize: 13,
+                    color: "#5a7a5a",
+                    marginBottom: 24,
+                    lineHeight: 1.7,
+                    fontStyle: "italic",
                   }}
                 >
-                  Cảm ơn <strong>{form.name}</strong>! Chuyên viên Rever.vn sẽ
-                  liên hệ <strong>{form.phone}</strong> sớm nhất.
+                  *Mọi thông tin về dự án LaPura Bình Dương quý khách có thể
+                  liên hệ ngay với chúng tôi qua hotline hoặc form đăng ký.
                 </p>
-                <div
-                  style={{
-                    marginTop: 20,
-                    display: "flex",
-                    gap: 16,
-                    justifyContent: "center",
-                  }}
-                >
-                  <a
-                    href="tel:0877191940"
+
+                {submitted ? (
+                  <div
                     style={{
-                      fontFamily: "'Outfit',sans-serif",
-                      fontSize: 13,
-                      color: accent,
-                      fontWeight: 600,
-                      textDecoration: "none",
+                      textAlign: "center",
+                      padding: "48px 24px",
+                      background: "rgba(255,255,255,0.6)",
+                      border: "1px solid #c8ddb0",
                     }}
                   >
-                    📞 Gọi ngay
-                  </a>
-                  <a
-                    href="https://zalo.me/0877191940"
-                    target="_blank"
-                    rel="noreferrer"
-                    style={{
-                      fontFamily: "'Outfit',sans-serif",
-                      fontSize: 13,
-                      color: "#0068FF",
-                      fontWeight: 600,
-                      textDecoration: "none",
-                    }}
-                  >
-                    💬 Zalo
-                  </a>
-                </div>
-              </div>
-            </AnimatedSection>
-          ) : (
-            <AnimatedSection delay={80}>
-              <div
-                style={{
-                  background: "#f8f5f0",
-                  padding: "40px 36px",
-                  boxShadow: "0 4px 32px rgba(0,0,0,0.05)",
-                }}
-              >
-                <div
-                  style={{ display: "flex", flexDirection: "column", gap: 18 }}
-                >
-                  {[
-                    {
-                      field: "name",
-                      label: "Họ và tên *",
-                      placeholder: "Nguyễn Văn A",
-                    },
-                    {
-                      field: "phone",
-                      label: "Số điện thoại / Zalo *",
-                      placeholder: "0901 234 567",
-                    },
-                  ].map(({ field, label, placeholder }) => (
-                    <div key={field}>
-                      <label
-                        style={{
-                          display: "block",
-                          fontFamily: "'Outfit',sans-serif",
-                          fontSize: 11,
-                          fontWeight: 600,
-                          color: "#aaa",
-                          letterSpacing: "0.1em",
-                          textTransform: "uppercase",
-                          marginBottom: 7,
-                        }}
-                      >
-                        {label}
-                      </label>
-                      <input
-                        type={field === "phone" ? "tel" : "text"}
-                        placeholder={placeholder}
-                        value={form[field]}
-                        onChange={(e) =>
-                          setForm((f) => ({ ...f, [field]: e.target.value }))
-                        }
-                        style={{
-                          width: "100%",
-                          padding: "13px 16px",
-                          background: "white",
-                          border: "1px solid #e8e2d8",
-                          outline: "none",
-                          fontSize: 14,
-                          color: dark,
-                          transition: "border-color 0.25s",
-                        }}
-                        onFocus={(e) => (e.target.style.borderColor = accent)}
-                        onBlur={(e) => (e.target.style.borderColor = "#e8e2d8")}
-                      />
-                    </div>
-                  ))}
-                  <div>
-                    <label
+                    <div
                       style={{
-                        display: "block",
-                        fontFamily: "'Outfit',sans-serif",
-                        fontSize: 11,
-                        fontWeight: 600,
-                        color: "#aaa",
-                        letterSpacing: "0.1em",
-                        textTransform: "uppercase",
-                        marginBottom: 7,
+                        display: "flex",
+                        justifyContent: "center",
+                        marginBottom: 16,
                       }}
                     >
-                      Loại căn quan tâm
-                    </label>
-                    <select
-                      value={form.note}
+                      <SvgCheck />
+                    </div>
+                    <h3
+                      style={{
+                        fontFamily: "'Outfit',sans-serif",
+                        fontSize: 18,
+                        fontWeight: 700,
+                        marginBottom: 10,
+                        color: "#1e5c2e",
+                      }}
+                    >
+                      Đăng ký thành công!
+                    </h3>
+                    <p
+                      style={{
+                        fontFamily: "'Outfit',sans-serif",
+                        fontSize: 14,
+                        color: "#5a7a5a",
+                        lineHeight: 1.8,
+                      }}
+                    >
+                      Cảm ơn <strong>{form.name}</strong>! Chuyên viên sẽ liên
+                      hệ <strong>{form.phone}</strong> sớm nhất.
+                    </p>
+                    <div
+                      style={{
+                        marginTop: 20,
+                        display: "flex",
+                        gap: 16,
+                        justifyContent: "center",
+                      }}
+                    >
+                      <a
+                        href="tel:0877191940"
+                        style={{
+                          fontFamily: "'Outfit',sans-serif",
+                          fontSize: 13,
+                          color: "#1e5c2e",
+                          fontWeight: 700,
+                          textDecoration: "none",
+                        }}
+                      >
+                        📞 Gọi ngay
+                      </a>
+                      <a
+                        href="https://zalo.me/0877191940"
+                        target="_blank"
+                        rel="noreferrer"
+                        style={{
+                          fontFamily: "'Outfit',sans-serif",
+                          fontSize: 13,
+                          color: "#0068FF",
+                          fontWeight: 700,
+                          textDecoration: "none",
+                        }}
+                      >
+                        💬 Zalo
+                      </a>
+                    </div>
+                  </div>
+                ) : (
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      gap: 14,
+                    }}
+                  >
+                    {/* Họ tên */}
+                    <input
+                      type="text"
+                      placeholder="Họ tên (*)"
+                      value={form.name}
                       onChange={(e) =>
-                        setForm((f) => ({ ...f, note: e.target.value }))
+                        setForm((f) => ({ ...f, name: e.target.value }))
                       }
                       style={{
                         width: "100%",
-                        padding: "13px 16px",
+                        padding: "14px 18px",
                         background: "white",
-                        border: "1px solid #e8e2d8",
+                        border: "1px solid #ccddb0",
                         outline: "none",
                         fontSize: 14,
                         color: dark,
-                        appearance: "none",
+                        fontFamily: "'Outfit',sans-serif",
+                        transition: "border-color 0.2s",
+                      }}
+                      onFocus={(e) => (e.target.style.borderColor = "#1e5c2e")}
+                      onBlur={(e) => (e.target.style.borderColor = "#ccddb0")}
+                    />
+                    {/* Điện thoại */}
+                    <input
+                      type="tel"
+                      placeholder="Điện thoại (*)"
+                      value={form.phone}
+                      onChange={(e) =>
+                        setForm((f) => ({ ...f, phone: e.target.value }))
+                      }
+                      style={{
+                        width: "100%",
+                        padding: "14px 18px",
+                        background: "white",
+                        border: "1px solid #ccddb0",
+                        outline: "none",
+                        fontSize: 14,
+                        color: dark,
+                        fontFamily: "'Outfit',sans-serif",
+                        transition: "border-color 0.2s",
+                      }}
+                      onFocus={(e) => (e.target.style.borderColor = "#1e5c2e")}
+                      onBlur={(e) => (e.target.style.borderColor = "#ccddb0")}
+                    />
+                    {/* Email */}
+                    <input
+                      type="email"
+                      placeholder="Địa chỉ email"
+                      value={form.email || ""}
+                      onChange={(e) =>
+                        setForm((f) => ({ ...f, email: e.target.value }))
+                      }
+                      style={{
+                        width: "100%",
+                        padding: "14px 18px",
+                        background: "white",
+                        border: "1px solid #ccddb0",
+                        outline: "none",
+                        fontSize: 14,
+                        color: dark,
+                        fontFamily: "'Outfit',sans-serif",
+                        transition: "border-color 0.2s",
+                      }}
+                      onFocus={(e) => (e.target.style.borderColor = "#1e5c2e")}
+                      onBlur={(e) => (e.target.style.borderColor = "#ccddb0")}
+                    />
+                    {/* Lời nhắn */}
+                    <textarea
+                      placeholder="Lời nhắn"
+                      value={form.message || ""}
+                      onChange={(e) =>
+                        setForm((f) => ({ ...f, message: e.target.value }))
+                      }
+                      rows={5}
+                      style={{
+                        width: "100%",
+                        padding: "14px 18px",
+                        background: "white",
+                        border: "1px solid #ccddb0",
+                        outline: "none",
+                        fontSize: 14,
+                        color: dark,
+                        fontFamily: "'Outfit',sans-serif",
+                        resize: "vertical",
+                        transition: "border-color 0.2s",
+                      }}
+                      onFocus={(e) => (e.target.style.borderColor = "#1e5c2e")}
+                      onBlur={(e) => (e.target.style.borderColor = "#ccddb0")}
+                    />
+                    {/* Submit */}
+                    <button
+                      disabled={!form.name || !form.phone || form.submitting}
+                      onClick={async () => {
+                        if (!form.name || !form.phone) return;
+                        setForm((f) => ({ ...f, submitting: true }));
+                        // ── THAY URL NÀY BẰNG GOOGLE APPS SCRIPT WEB APP URL CỦA BẠN ──
+                        const SHEET_URL =
+                          "https://script.google.com/macros/s/AKfycbyNSN55zy49wP3w3JpXqTSkNNPkktqzaFc1FaM1R0tYONuXxRbf-JgYu-ywDHyNWu-p/exec";
+                        try {
+                          await fetch(SHEET_URL, {
+                            method: "POST",
+                            mode: "no-cors",
+                            headers: { "Content-Type": "application/json" },
+                            body: JSON.stringify({
+                              name: form.name,
+                              phone: form.phone,
+                              email: form.email || "",
+                              message: form.message || "",
+                              note: form.note || "",
+                              source: "La Pura Landing Page",
+                              time: new Date().toLocaleString("vi-VN"),
+                            }),
+                          });
+                        } catch (_) {}
+                        setSubmitted(true);
+                        setForm((f) => ({ ...f, submitting: false }));
+                      }}
+                      style={{
+                        width: "100%",
+                        padding: "16px",
+                        background:
+                          form.name && form.phone
+                            ? "linear-gradient(135deg,#e8a020,#f5c040,#e8a020)"
+                            : "#ccc",
+                        color: "#fff",
+                        fontFamily: "'Outfit',sans-serif",
+                        fontSize: 14,
+                        fontWeight: 800,
+                        letterSpacing: "0.15em",
+                        textTransform: "uppercase",
+                        border: "none",
+                        cursor:
+                          form.name && form.phone ? "pointer" : "not-allowed",
+                        transition: "all 0.3s",
+                        marginTop: 4,
+                      }}
+                      onMouseEnter={(e) => {
+                        if (form.name && form.phone)
+                          e.currentTarget.style.transform = "translateY(-2px)";
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.transform = "translateY(0)";
                       }}
                     >
-                      <option value="">-- Chọn loại căn --</option>
-                      <option>Căn hộ 1PN + 1 (từ 2,2 tỷ)</option>
-                      <option>Căn hộ 2PN + 1WC (từ 2,49 tỷ)</option>
-                      <option>Căn hộ 2PN + 2WC (từ 3 tỷ)</option>
-                      <option>Căn hộ Sân vườn (từ 4,5 tỷ)</option>
-                    </select>
+                      {form.submitting ? "Đang gửi..." : "ĐĂNG KÝ NGAY"}
+                    </button>
+
+                    <p
+                      style={{
+                        fontFamily: "'Outfit',sans-serif",
+                        fontSize: 11,
+                        color: "#7a9a7a",
+                        textAlign: "center",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        gap: 5,
+                      }}
+                    >
+                      <SvgLock /> Thông tin bảo mật tuyệt đối
+                    </p>
                   </div>
-                  <button
-                    className="btn-gold"
-                    style={{
-                      width: "100%",
-                      padding: "16px",
-                      fontSize: 13,
-                      marginTop: 4,
-                      clipPath: "none",
-                    }}
-                    onClick={() => {
-                      if (form.name && form.phone) setSubmitted(true);
-                    }}
-                    disabled={!form.name || !form.phone}
-                  >
-                    Gửi Thông Tin — Nhận Tư Vấn Ngay
-                  </button>
-                  <p
-                    style={{
-                      fontFamily: "'Outfit',sans-serif",
-                      fontSize: 11,
-                      color: "#ccc",
-                      textAlign: "center",
-                      lineHeight: 1.6,
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      gap: 5,
-                    }}
-                  >
-                    <SvgLock /> Thông tin bảo mật tuyệt đối
-                  </p>
-                </div>
+                )}
               </div>
             </AnimatedSection>
-          )}
+          </div>
         </div>
       </section>
 
