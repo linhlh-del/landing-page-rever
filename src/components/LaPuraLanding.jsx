@@ -1803,9 +1803,12 @@ export default function LaPuraLanding() {
                     style={{
                       position: "relative",
                       cursor: "zoom-in",
-                      overflow: "hidden",
-                      background: "#f0ece6",
+                      background: "#f8f5f0",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
                       minHeight: 480,
+                      padding: "24px 24px 72px",
                     }}
                   >
                     <img
@@ -1813,13 +1816,14 @@ export default function LaPuraLanding() {
                       alt={p.type}
                       style={{
                         width: "100%",
-                        height: "100%",
-                        objectFit: "cover",
+                        maxHeight: 520,
+                        objectFit: "contain",
+                        objectPosition: "center",
                         display: "block",
                         transition: "transform 0.6s",
                       }}
                       onMouseEnter={(e) =>
-                        (e.currentTarget.style.transform = "scale(1.04)")
+                        (e.currentTarget.style.transform = "scale(1.03)")
                       }
                       onMouseLeave={(e) =>
                         (e.currentTarget.style.transform = "scale(1)")
@@ -3168,6 +3172,70 @@ export default function LaPuraLanding() {
                       onFocus={(e) => (e.target.style.borderColor = "#1e5c2e")}
                       onBlur={(e) => (e.target.style.borderColor = "#ccddb0")}
                     />
+                    {/* Nhu cầu */}
+                    <div style={{ position: "relative" }}>
+                      <select
+                        value={form.need || ""}
+                        onChange={(e) =>
+                          setForm((f) => ({ ...f, need: e.target.value }))
+                        }
+                        style={{
+                          width: "100%",
+                          padding: "14px 18px",
+                          background: "white",
+                          border: "1px solid #ccddb0",
+                          outline: "none",
+                          fontSize: 14,
+                          color: form.need ? dark : "#aaa",
+                          fontFamily: "'Outfit',sans-serif",
+                          appearance: "none",
+                          cursor: "pointer",
+                          transition: "border-color 0.2s",
+                        }}
+                        onFocus={(e) =>
+                          (e.target.style.borderColor = "#1e5c2e")
+                        }
+                        onBlur={(e) => (e.target.style.borderColor = "#ccddb0")}
+                      >
+                        <option value="">Nhu cầu của bạn</option>
+                        <option value="Căn hộ 1PN – Từ 2,2 tỷ (NFA: 46–55m²)">
+                          Căn hộ 1PN – Từ 2,2 tỷ (NFA: 46–55m²)
+                        </option>
+                        <option value="Căn hộ 2PN 1WC – Từ 2,49 tỷ (NFA: 61–66m²)">
+                          Căn hộ 2PN 1WC – Từ 2,49 tỷ (NFA: 61–66m²)
+                        </option>
+                        <option value="Căn hộ 2PN 2WC – Từ 3 tỷ (NFA: 66–76m²)">
+                          Căn hộ 2PN 2WC – Từ 3 tỷ (NFA: 66–76m²)
+                        </option>
+                        <option value="Căn hộ Sân vườn – Từ 4,5 tỷ (NFA: 117m²+)">
+                          Căn hộ Sân vườn – Từ 4,5 tỷ (NFA: 117m²+)
+                        </option>
+                        <option value="Tư vấn tổng quan / Chưa xác định">
+                          Tư vấn tổng quan / Chưa xác định
+                        </option>
+                      </select>
+                      <div
+                        style={{
+                          position: "absolute",
+                          right: 16,
+                          top: "50%",
+                          transform: "translateY(-50%)",
+                          pointerEvents: "none",
+                        }}
+                      >
+                        <svg
+                          width="14"
+                          height="14"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="#aaa"
+                          strokeWidth="2"
+                        >
+                          <polyline points="6 9 12 15 18 9" />
+                        </svg>
+                      </div>
+                    </div>
+
                     {/* Lời nhắn */}
                     <textarea
                       placeholder="Lời nhắn"
@@ -3175,7 +3243,7 @@ export default function LaPuraLanding() {
                       onChange={(e) =>
                         setForm((f) => ({ ...f, message: e.target.value }))
                       }
-                      rows={5}
+                      rows={4}
                       style={{
                         width: "100%",
                         padding: "14px 18px",
@@ -3209,6 +3277,7 @@ export default function LaPuraLanding() {
                               name: form.name,
                               phone: form.phone,
                               email: form.email || "",
+                              need: form.need || "",
                               message: form.message || "",
                               note: form.note || "",
                               source: "La Pura Landing Page",
