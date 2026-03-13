@@ -74,7 +74,6 @@ const PRODUCTS = [
   },
 ];
 
-// Tiến độ thi công
 const CONSTRUCTION = [
   {
     src: "/images/tien-do-thi-cong-lapura-binh-duong.jpg",
@@ -90,7 +89,6 @@ const CONSTRUCTION = [
   },
 ];
 
-// Nhà mẫu
 const SHOWROOM = [
   {
     src: "/images/hinh-anh-nha-mau-la-pura-1-1.jpg",
@@ -137,8 +135,8 @@ const OVERVIEW = [
 
 const SvgPhone = () => (
   <svg
-    width="20"
-    height="20"
+    width="22"
+    height="22"
     viewBox="0 0 24 24"
     fill="none"
     stroke="currentColor"
@@ -150,7 +148,7 @@ const SvgPhone = () => (
   </svg>
 );
 
-const SvgZalo = () => (
+const SvgZaloNav = () => (
   <svg width="26" height="26" viewBox="0 0 48 48" fill="none">
     <rect width="48" height="48" rx="10" fill="#0068FF" />
     <text
@@ -467,22 +465,40 @@ const FLOOR_PLANS = [
   { label: "Tầng 31–39", file: "/images/mat-bang-zenia-tang-31-39.jpg" },
 ];
 
+// ── Inject Zalo OA Widget SDK ──
 function useZaloWidget() {
   useEffect(() => {
     if (document.getElementById("zalo-sdk-script")) return;
+
     const div = document.createElement("div");
     div.className = "zalo-chat-widget";
     div.setAttribute("data-oaid", "1717736678695240623");
     div.setAttribute("data-welcome-message", "Rất vui khi được hỗ trợ bạn!");
     div.setAttribute("data-autopopup", "0");
-    div.setAttribute("data-width", "");
-    div.setAttribute("data-height", "");
+    div.setAttribute("data-width", "350");
+    div.setAttribute("data-height", "420");
     document.body.appendChild(div);
+
     const script = document.createElement("script");
     script.id = "zalo-sdk-script";
     script.src = "https://sp.zalo.me/plugins/sdk.js";
     script.async = true;
+
+    script.onload = () => {
+      const timer = setInterval(() => {
+        const sdkBtn = document.querySelector(".zalo-chat-button");
+        const customBtn = document.getElementById("custom-zalo-btn");
+        if (sdkBtn) {
+          sdkBtn.style.cssText +=
+            "bottom:16px!important;right:16px!important;left:auto!important;";
+          if (customBtn) customBtn.style.display = "none";
+          clearInterval(timer);
+        }
+      }, 500);
+    };
+
     document.head.appendChild(script);
+
     return () => {
       const el = document.querySelector(".zalo-chat-widget");
       if (el) el.remove();
@@ -561,6 +577,93 @@ export default function LaPuraLanding() {
         ::-webkit-scrollbar { width: 5px; }
         ::-webkit-scrollbar-track { background: #f8f5f0; }
         ::-webkit-scrollbar-thumb { background: #c8a96e; border-radius: 3px; }
+
+        /* ── Floating button animations ── */
+        @keyframes wobble-phone {
+          0%,100%  { transform: rotate(0deg) scale(1); }
+          10%      { transform: rotate(-15deg) scale(1.05); }
+          20%      { transform: rotate(12deg) scale(1.05); }
+          30%      { transform: rotate(-10deg) scale(1.02); }
+          40%      { transform: rotate(8deg) scale(1.02); }
+          50%      { transform: rotate(-5deg) scale(1); }
+          60%      { transform: rotate(3deg) scale(1); }
+          70%      { transform: rotate(-2deg); }
+        }
+        @keyframes pulse-glow-gold {
+          0%,100% { box-shadow: 0 4px 20px rgba(200,169,110,0.5), 0 0 0 0 rgba(200,169,110,0.5); }
+          50%     { box-shadow: 0 4px 28px rgba(200,169,110,0.7), 0 0 0 12px rgba(200,169,110,0); }
+        }
+        @keyframes pulse-ring-gold {
+          0%   { transform: scale(1); opacity: 0.7; }
+          100% { transform: scale(1.7); opacity: 0; }
+        }
+
+        .float-call-btn {
+          animation: wobble-phone 2.2s ease-in-out infinite, pulse-glow-gold 2.2s ease-in-out infinite;
+          position: relative;
+        }
+        .float-call-btn::before,
+        .float-call-btn::after {
+          content: '';
+          position: absolute;
+          inset: 0;
+          border-radius: 50%;
+          border: 2px solid rgba(200,169,110,0.6);
+          animation: pulse-ring-gold 2.2s ease-out infinite;
+        }
+        .float-call-btn::after {
+          animation-delay: 0.7s;
+        }
+        .float-call-btn:hover {
+          animation-play-state: paused;
+          transform: scale(1.12) !important;
+        }
+
+        /* Custom Zalo floating button */
+        @keyframes wobble-zalo {
+          0%,100% { transform: scale(1) rotate(0deg); }
+          15%     { transform: scale(1.08) rotate(-8deg); }
+          30%     { transform: scale(1.08) rotate(6deg); }
+          45%     { transform: scale(1.04) rotate(-4deg); }
+          60%     { transform: scale(1.02) rotate(2deg); }
+          75%     { transform: scale(1) rotate(-1deg); }
+        }
+        @keyframes pulse-glow-blue {
+          0%,100% { box-shadow: 0 4px 20px rgba(0,104,255,0.5), 0 0 0 0 rgba(0,104,255,0.4); }
+          50%     { box-shadow: 0 4px 28px rgba(0,104,255,0.7), 0 0 0 12px rgba(0,104,255,0); }
+        }
+        @keyframes pulse-ring-blue {
+          0%   { transform: scale(1); opacity: 0.6; }
+          100% { transform: scale(1.7); opacity: 0; }
+        }
+        .float-zalo-btn {
+          animation: wobble-zalo 2.8s ease-in-out infinite, pulse-glow-blue 2.8s ease-in-out infinite;
+          position: relative;
+        }
+        .float-zalo-btn::before,
+        .float-zalo-btn::after {
+          content: '';
+          position: absolute;
+          inset: 0;
+          border-radius: 50%;
+          border: 2px solid rgba(0,104,255,0.5);
+          animation: pulse-ring-blue 2.8s ease-out infinite;
+        }
+        .float-zalo-btn::after { animation-delay: 0.9s; }
+        .float-zalo-btn:hover {
+          animation-play-state: paused;
+          transform: scale(1.12) !important;
+        }
+
+        /* Force Zalo SDK widget bottom-right khi load */
+        .zalo-chat-widget,
+        #zalo-chat-plugin,
+        .zalo-chat-button {
+          bottom: 16px !important;
+          right: 16px !important;
+          left: auto !important;
+        }
+
         .nav-link { font-family:'Outfit',sans-serif; font-size:12px; font-weight:500; letter-spacing:0.13em; text-transform:uppercase; text-decoration:none; color:rgba(255,255,255,0.75); transition:color 0.25s; }
         .nav-link:hover { color:#c8a96e; }
         .btn-gold { background:linear-gradient(135deg,#c8a96e,#e8c98a,#c8a96e); color:#0d1f1a; font-family:'Outfit',sans-serif; font-size:12px; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; padding:14px 32px; border:none; cursor:pointer; transition:all 0.3s; }
@@ -576,12 +679,6 @@ export default function LaPuraLanding() {
         .amenity-card:hover { border-color:#c8a96e; transform:translateY(-4px); box-shadow:0 8px 24px rgba(200,169,110,0.14); }
         .amenity-card:hover .a-icon { color:#c8a96e; }
         .a-icon { color:#999; transition:color 0.3s; display:flex; justify-content:center; margin-bottom:14px; }
-        .float-btn { position:fixed; right:22px; z-index:999; width:54px; height:54px; border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer; border:none; text-decoration:none; transition:transform 0.2s,box-shadow 0.2s; }
-        .float-btn:hover { transform:scale(1.1); }
-        .pulse { position:relative; }
-        .pulse::after { content:''; position:absolute; inset:-5px; border-radius:50%; border:2px solid; animation:pulse-ring 2s ease-out infinite; }
-        .pulse-gold::after { border-color:#c8a96e; }
-        .pulse-blue::after { border-color:#0068FF; }
         .divider { display:flex; align-items:center; justify-content:center; gap:14px; margin-bottom:14px; }
         .divider::before,.divider::after { content:''; width:60px; height:1px; background:linear-gradient(90deg,transparent,#c8a96e,transparent); }
         .overview-row { display:flex; padding:15px 32px; border-bottom:1px solid #f0ece6; transition:background 0.15s; }
@@ -591,7 +688,6 @@ export default function LaPuraLanding() {
         input,select { font-family:'Outfit',sans-serif; }
         @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
         @keyframes shimmer { 0%{background-position:-200% center} 100%{background-position:200% center} }
-        @keyframes pulse-ring { 0%{transform:scale(1);opacity:0.7} 100%{transform:scale(1.55);opacity:0} }
         .hero-float { animation:float 4s ease-in-out infinite; }
         .shimmer { background:linear-gradient(90deg,#c8a96e 25%,#f5dfa0 50%,#c8a96e 75%); background-size:200% auto; -webkit-background-clip:text; -webkit-text-fill-color:transparent; animation:shimmer 3s linear infinite; }
         .product-tab-btn { font-family:'Outfit',sans-serif; font-size:12px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; padding:18px 24px; cursor:pointer; border:none; transition:all 0.3s; flex:1 1 auto; max-width:280px; border-bottom:3px solid transparent; }
@@ -609,63 +705,70 @@ export default function LaPuraLanding() {
           .product-bottom-strip{padding:16px 24px!important; gap:16px!important;}
           .product-tab-btn{font-size:10px!important; padding:14px 12px!important;}
         }
-        .zalo-chat-widget { right: 0 !important; left: auto !important; bottom: 0 !important; }
-        #zalo-chat-plugin { right: 0 !important; left: auto !important; }
-        .zalo-chat-button { right: 20px !important; left: auto !important; }
       `}</style>
 
-      {/* Floating Phone */}
+      {/* ── Floating Phone Button với hiệu ứng rung ── */}
       <a
         href="tel:0877191940"
+        className="float-call-btn"
         style={{
           position: "fixed",
           bottom: 90,
-          right: 22,
+          right: 20,
           zIndex: 9999,
-          width: 54,
-          height: 54,
+          width: 56,
+          height: 56,
           borderRadius: "50%",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
           background: "linear-gradient(135deg,#c8a96e,#e8c98a)",
-          boxShadow: "0 4px 18px rgba(200,169,110,0.4)",
           textDecoration: "none",
-          transition: "transform 0.2s",
+          color: "#0d1f1a",
         }}
-        title="Gọi ngay"
-        onMouseEnter={(e) => (e.currentTarget.style.transform = "scale(1.1)")}
-        onMouseLeave={(e) => (e.currentTarget.style.transform = "scale(1)")}
+        title="Gọi ngay 0877 191 940"
       >
         <SvgPhone />
       </a>
 
-      {/* Floating Zalo */}
+      {/* ── Custom Zalo Button (fallback + primary, ẩn khi SDK widget load thành công) ── */}
       <a
-        href="https://zalo.me/0877191940"
+        id="custom-zalo-btn"
+        href="https://zalo.me/1717736678695240623"
         target="_blank"
         rel="noreferrer"
+        className="float-zalo-btn"
         style={{
           position: "fixed",
-          bottom: 24,
-          right: 22,
+          bottom: 20,
+          right: 20,
           zIndex: 9999,
-          width: 54,
-          height: 54,
+          width: 56,
+          height: 56,
           borderRadius: "50%",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
           background: "#0068FF",
-          boxShadow: "0 4px 18px rgba(0,104,255,0.4)",
           textDecoration: "none",
-          transition: "transform 0.2s",
+          color: "white",
         }}
-        title="Chat Zalo"
-        onMouseEnter={(e) => (e.currentTarget.style.transform = "scale(1.1)")}
-        onMouseLeave={(e) => (e.currentTarget.style.transform = "scale(1)")}
+        title="Chat Zalo OA Rever"
       >
-        <SvgZalo />
+        <svg width="32" height="32" viewBox="0 0 48 48" fill="none">
+          <text
+            x="50%"
+            y="56%"
+            dominantBaseline="middle"
+            textAnchor="middle"
+            fontFamily="Arial Black,Arial"
+            fontWeight="900"
+            fontSize="20"
+            fill="white"
+          >
+            Za
+          </text>
+        </svg>
       </a>
 
       {/* NAVBAR */}
@@ -741,7 +844,7 @@ export default function LaPuraLanding() {
                 fontWeight: 600,
               }}
             >
-              <SvgZalo /> <span className="hide-mobile">Zalo</span>
+              <SvgZaloNav /> <span className="hide-mobile">Zalo</span>
             </a>
             <a
               href="tel:0877191940"
@@ -957,7 +1060,7 @@ export default function LaPuraLanding() {
               style={{ textDecoration: "none" }}
             >
               <button className="btn-zalo">
-                <SvgZalo /> Nhắn Zalo Ngay
+                <SvgZaloNav /> Nhắn Zalo Ngay
               </button>
             </a>
           </div>
@@ -1390,7 +1493,6 @@ export default function LaPuraLanding() {
                   position: "relative",
                   outline:
                     activeShowroom === i ? `2px solid ${accent}` : "none",
-                  outlineOffset: 0,
                 }}
               >
                 <img
@@ -1417,7 +1519,7 @@ export default function LaPuraLanding() {
         </div>
       </section>
 
-      {/* ===================== PRODUCTS - FULL WIDTH REDESIGN ===================== */}
+      {/* PRODUCTS */}
       <section
         id="sanpham"
         style={{
@@ -1427,7 +1529,6 @@ export default function LaPuraLanding() {
           overflow: "hidden",
         }}
       >
-        {/* Decorative background */}
         <div
           style={{
             position: "absolute",
@@ -1437,9 +1538,7 @@ export default function LaPuraLanding() {
             backgroundSize: "32px 32px",
           }}
         />
-
         <div style={{ padding: "96px 0 0", position: "relative", zIndex: 1 }}>
-          {/* Section Header */}
           <AnimatedSection>
             <div style={{ padding: "0 24px" }}>
               <div className="divider">
@@ -1480,8 +1579,6 @@ export default function LaPuraLanding() {
               </p>
             </div>
           </AnimatedSection>
-
-          {/* Product Type Tabs */}
           <AnimatedSection delay={60}>
             <div
               style={{
@@ -1534,7 +1631,6 @@ export default function LaPuraLanding() {
             </div>
           </AnimatedSection>
 
-          {/* Active Product Panels */}
           {PRODUCTS.map((p, i) => (
             <div
               key={p.type}
@@ -1543,7 +1639,6 @@ export default function LaPuraLanding() {
                 borderTop: `2px solid ${p.color}`,
               }}
             >
-              {/* Main Split Layout */}
               <div
                 className="product-panel-grid"
                 style={{
@@ -1552,7 +1647,7 @@ export default function LaPuraLanding() {
                   minHeight: 620,
                 }}
               >
-                {/* LEFT: Info Panel */}
+                {/* LEFT */}
                 <div
                   className="product-info-panel"
                   style={{
@@ -1560,7 +1655,6 @@ export default function LaPuraLanding() {
                       "linear-gradient(145deg, rgba(255,255,255,0.03) 0%, rgba(0,0,0,0.25) 100%)",
                   }}
                 >
-                  {/* Tag + Title */}
                   <div>
                     <span
                       style={{
@@ -1594,8 +1688,6 @@ export default function LaPuraLanding() {
                       style={{ width: 48, height: 2, background: p.color }}
                     />
                   </div>
-
-                  {/* Price Block */}
                   <div
                     style={{
                       background: "rgba(255,255,255,0.04)",
@@ -1649,8 +1741,6 @@ export default function LaPuraLanding() {
                       Hỗ trợ vay đến 70% giá trị căn hộ · Lãi suất ưu đãi
                     </div>
                   </div>
-
-                  {/* Thông số kỹ thuật */}
                   <div>
                     <div
                       style={{
@@ -1710,8 +1800,6 @@ export default function LaPuraLanding() {
                       ))}
                     </div>
                   </div>
-
-                  {/* Đặc điểm nổi bật */}
                   <div>
                     <div
                       style={{
@@ -1764,8 +1852,6 @@ export default function LaPuraLanding() {
                       ))}
                     </div>
                   </div>
-
-                  {/* CTA Buttons */}
                   <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
                     <button
                       className="btn-gold"
@@ -1788,13 +1874,13 @@ export default function LaPuraLanding() {
                         className="btn-zalo"
                         style={{ width: "100%", justifyContent: "center" }}
                       >
-                        <SvgZalo /> Hỏi Qua Zalo
+                        <SvgZaloNav /> Hỏi Qua Zalo
                       </button>
                     </a>
                   </div>
                 </div>
 
-                {/* RIGHT: Floor Plan Image or Placeholder */}
+                {/* RIGHT */}
                 {p.floorPlan ? (
                   <div
                     onClick={() =>
@@ -1911,7 +1997,6 @@ export default function LaPuraLanding() {
                     </div>
                   </div>
                 ) : (
-                  /* Premium / no floor plan placeholder */
                   <div
                     style={{
                       background: `linear-gradient(135deg, ${p.color}18 0%, rgba(0,0,0,0.3) 100%)`,
@@ -1977,7 +2062,6 @@ export default function LaPuraLanding() {
                 )}
               </div>
 
-              {/* Bottom Summary Strip */}
               <div className="product-bottom-strip">
                 <div style={{ display: "flex", gap: 40, flexWrap: "wrap" }}>
                   {[
@@ -2032,7 +2116,6 @@ export default function LaPuraLanding() {
           ))}
         </div>
       </section>
-      {/* ===================== END PRODUCTS ===================== */}
 
       {/* LIGHTBOX */}
       {lightbox && (
@@ -2804,7 +2887,7 @@ export default function LaPuraLanding() {
                 style={{ textDecoration: "none" }}
               >
                 <button className="btn-zalo">
-                  <SvgZalo /> Chat Zalo
+                  <SvgZaloNav /> Chat Zalo
                 </button>
               </a>
             </div>
@@ -2818,7 +2901,6 @@ export default function LaPuraLanding() {
         style={{ padding: "80px 0 0", background: "#e8f0e0" }}
       >
         <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 24px" }}>
-          {/* Section title */}
           <AnimatedSection>
             <h2
               style={{
@@ -2835,8 +2917,6 @@ export default function LaPuraLanding() {
               NHẬN THÔNG TIN & CHIẾT KHẤU
             </h2>
           </AnimatedSection>
-
-          {/* 2-col layout */}
           <div
             style={{
               display: "grid",
@@ -2848,7 +2928,7 @@ export default function LaPuraLanding() {
             }}
             className="col2"
           >
-            {/* LEFT: Thông tin liên hệ */}
+            {/* LEFT */}
             <AnimatedSection>
               <div style={{ padding: "0 48px 0 0", textAlign: "center" }}>
                 <h3
@@ -2864,8 +2944,6 @@ export default function LaPuraLanding() {
                 >
                   THÔNG TIN LIÊN HỆ
                 </h3>
-
-                {/* Logo */}
                 <div
                   style={{
                     display: "inline-flex",
@@ -2889,7 +2967,6 @@ export default function LaPuraLanding() {
                     La Pura
                   </span>
                 </div>
-
                 <div
                   style={{
                     fontFamily: "'Outfit',sans-serif",
@@ -2961,7 +3038,6 @@ export default function LaPuraLanding() {
                     </span>
                   </div>
                 </div>
-
                 <div
                   style={{
                     marginTop: 32,
@@ -2978,19 +3054,6 @@ export default function LaPuraLanding() {
                 </div>
               </div>
             </AnimatedSection>
-
-            {/* Divider */}
-            <div
-              style={{
-                position: "absolute",
-                left: "50%",
-                top: 0,
-                bottom: 0,
-                width: 1,
-                background: "#c8ddb0",
-                display: "none",
-              }}
-            />
 
             {/* RIGHT: Form */}
             <AnimatedSection delay={80}>
@@ -3106,7 +3169,6 @@ export default function LaPuraLanding() {
                       gap: 14,
                     }}
                   >
-                    {/* Họ tên */}
                     <input
                       type="text"
                       placeholder="Họ tên (*)"
@@ -3128,7 +3190,6 @@ export default function LaPuraLanding() {
                       onFocus={(e) => (e.target.style.borderColor = "#1e5c2e")}
                       onBlur={(e) => (e.target.style.borderColor = "#ccddb0")}
                     />
-                    {/* Điện thoại */}
                     <input
                       type="tel"
                       placeholder="Điện thoại (*)"
@@ -3150,7 +3211,6 @@ export default function LaPuraLanding() {
                       onFocus={(e) => (e.target.style.borderColor = "#1e5c2e")}
                       onBlur={(e) => (e.target.style.borderColor = "#ccddb0")}
                     />
-                    {/* Email */}
                     <input
                       type="email"
                       placeholder="Địa chỉ email"
@@ -3172,7 +3232,6 @@ export default function LaPuraLanding() {
                       onFocus={(e) => (e.target.style.borderColor = "#1e5c2e")}
                       onBlur={(e) => (e.target.style.borderColor = "#ccddb0")}
                     />
-                    {/* Nhu cầu */}
                     <div style={{ position: "relative" }}>
                       <select
                         value={form.need || ""}
@@ -3235,8 +3294,6 @@ export default function LaPuraLanding() {
                         </svg>
                       </div>
                     </div>
-
-                    {/* Lời nhắn */}
                     <textarea
                       placeholder="Lời nhắn"
                       value={form.message || ""}
@@ -3259,13 +3316,11 @@ export default function LaPuraLanding() {
                       onFocus={(e) => (e.target.style.borderColor = "#1e5c2e")}
                       onBlur={(e) => (e.target.style.borderColor = "#ccddb0")}
                     />
-                    {/* Submit */}
                     <button
                       disabled={!form.name || !form.phone || form.submitting}
                       onClick={async () => {
                         if (!form.name || !form.phone) return;
                         setForm((f) => ({ ...f, submitting: true }));
-                        // ── THAY URL NÀY BẰNG GOOGLE APPS SCRIPT WEB APP URL CỦA BẠN ──
                         const SHEET_URL =
                           "https://script.google.com/macros/s/AKfycbyNSN55zy49wP3w3JpXqTSkNNPkktqzaFc1FaM1R0tYONuXxRbf-JgYu-ywDHyNWu-p/exec";
                         try {
@@ -3317,7 +3372,6 @@ export default function LaPuraLanding() {
                     >
                       {form.submitting ? "Đang gửi..." : "ĐĂNG KÝ NGAY"}
                     </button>
-
                     <p
                       style={{
                         fontFamily: "'Outfit',sans-serif",
