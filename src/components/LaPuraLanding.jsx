@@ -731,7 +731,7 @@ export default function LaPuraLanding() {
         <SvgPhone />
       </a>
 
-      {/* ── Custom Zalo Button (fallback + primary, ẩn khi SDK widget load thành công) ── */}
+      {/* ── Custom Zalo Button (fallback + primary, ẩn khi SDK widget load thành công) ──
       <a
         id="custom-zalo-btn"
         href="https://zalo.me/1717736678695240623"
@@ -769,7 +769,7 @@ export default function LaPuraLanding() {
             Za
           </text>
         </svg>
-      </a>
+      </a> */}
 
       {/* NAVBAR */}
       <nav
