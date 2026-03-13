@@ -465,46 +465,7 @@ const FLOOR_PLANS = [
   { label: "Tầng 31–39", file: "/images/mat-bang-zenia-tang-31-39.jpg" },
 ];
 
-// ── Inject Zalo OA Widget SDK ──
-function useZaloWidget() {
-  useEffect(() => {
-    if (document.getElementById("zalo-sdk-script")) return;
-
-    const div = document.createElement("div");
-    div.className = "zalo-chat-widget";
-    div.setAttribute("data-oaid", "1717736678695240623");
-    div.setAttribute("data-welcome-message", "Rất vui khi được hỗ trợ bạn!");
-    div.setAttribute("data-autopopup", "0");
-    div.setAttribute("data-width", "350");
-    div.setAttribute("data-height", "420");
-    document.body.appendChild(div);
-
-    const script = document.createElement("script");
-    script.id = "zalo-sdk-script";
-    script.src = "https://sp.zalo.me/plugins/sdk.js";
-    script.async = true;
-
-    script.onload = () => {
-      const timer = setInterval(() => {
-        const sdkBtn = document.querySelector(".zalo-chat-button");
-        const customBtn = document.getElementById("custom-zalo-btn");
-        if (sdkBtn) {
-          sdkBtn.style.cssText +=
-            "bottom:16px!important;right:16px!important;left:auto!important;";
-          if (customBtn) customBtn.style.display = "none";
-          clearInterval(timer);
-        }
-      }, 500);
-    };
-
-    document.head.appendChild(script);
-
-    return () => {
-      const el = document.querySelector(".zalo-chat-widget");
-      if (el) el.remove();
-    };
-  }, []);
-}
+// Zalo SDK đã bị loại bỏ — dùng custom button trực tiếp
 
 function useScrollAnimation() {
   const ref = useRef(null);
@@ -547,8 +508,6 @@ export default function LaPuraLanding() {
   const [lightbox, setLightbox] = useState(null);
   const [activeShowroom, setActiveShowroom] = useState(0);
   const [activeProduct, setActiveProduct] = useState(0);
-
-  useZaloWidget();
 
   useEffect(() => {
     const h = () => setScrolled(window.scrollY > 60);
@@ -655,14 +614,7 @@ export default function LaPuraLanding() {
           transform: scale(1.12) !important;
         }
 
-        /* Force Zalo SDK widget bottom-right khi load */
-        .zalo-chat-widget,
-        #zalo-chat-plugin,
-        .zalo-chat-button {
-          bottom: 16px !important;
-          right: 16px !important;
-          left: auto !important;
-        }
+
 
         .nav-link { font-family:'Outfit',sans-serif; font-size:12px; font-weight:500; letter-spacing:0.13em; text-transform:uppercase; text-decoration:none; color:rgba(255,255,255,0.75); transition:color 0.25s; }
         .nav-link:hover { color:#c8a96e; }
@@ -731,7 +683,7 @@ export default function LaPuraLanding() {
         <SvgPhone />
       </a>
 
-      {/* ── Custom Zalo Button (fallback + primary, ẩn khi SDK widget load thành công) ──
+      {/* ── Zalo OA Custom Button ── */}
       <a
         id="custom-zalo-btn"
         href="https://zalo.me/1717736678695240623"
@@ -752,24 +704,45 @@ export default function LaPuraLanding() {
           background: "#0068FF",
           textDecoration: "none",
           color: "white",
+          overflow: "hidden",
         }}
         title="Chat Zalo OA Rever"
       >
-        <svg width="32" height="32" viewBox="0 0 48 48" fill="none">
-          <text
-            x="50%"
-            y="56%"
-            dominantBaseline="middle"
-            textAnchor="middle"
-            fontFamily="Arial Black,Arial"
-            fontWeight="900"
-            fontSize="20"
+        {/* Logo Zalo chính thức */}
+        <svg
+          width="36"
+          height="36"
+          viewBox="0 0 240 240"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          {/* Bubble chat trắng */}
+          <path
+            d="M120 20C69.2 20 28 57.6 28 104C28 129.6 40.8 152.4 61.2 167.6L54 196L84 182.4C95.2 185.6 107.2 187.6 120 187.6C170.8 187.6 212 150 212 104C212 57.6 170.8 20 120 20Z"
             fill="white"
-          >
-            Za
-          </text>
+          />
+          {/* Chữ Z */}
+          <path
+            d="M82 82H140L82 130H140"
+            stroke="#0068FF"
+            strokeWidth="14"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+          {/* Chữ a */}
+          <path
+            d="M158 100C158 100 152 96 146 98C140 100 138 106 138 110C138 118 144 122 152 122C156 122 158 120 158 120V122H166V100H158ZM152 116C148 116 146 114 146 110C146 106 148 104 152 104C156 104 158 106 158 110C158 114 156 116 152 116Z"
+            fill="#0068FF"
+          />
+          {/* Chữ l */}
+          <path d="M172 84V122H180V84H172Z" fill="#0068FF" />
+          {/* Chữ o */}
+          <path
+            d="M195 98C187 98 182 103 182 110C182 117 187 122 195 122C203 122 208 117 208 110C208 103 203 98 195 98ZM195 116C191 116 190 113 190 110C190 107 191 104 195 104C199 104 200 107 200 110C200 113 199 116 195 116Z"
+            fill="#0068FF"
+          />
         </svg>
-      </a> */}
+      </a>
 
       {/* NAVBAR */}
       <nav
