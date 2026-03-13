@@ -578,40 +578,23 @@ export default function LaPuraLanding() {
           transform: scale(1.12) !important;
         }
 
-        /* Custom Zalo floating button */
+        /* Custom Zalo floating button - hiệu ứng rung */
         @keyframes wobble-zalo {
-          0%,100% { transform: scale(1) rotate(0deg); }
-          15%     { transform: scale(1.08) rotate(-8deg); }
-          30%     { transform: scale(1.08) rotate(6deg); }
-          45%     { transform: scale(1.04) rotate(-4deg); }
-          60%     { transform: scale(1.02) rotate(2deg); }
-          75%     { transform: scale(1) rotate(-1deg); }
-        }
-        @keyframes pulse-glow-blue {
-          0%,100% { box-shadow: 0 4px 20px rgba(0,104,255,0.5), 0 0 0 0 rgba(0,104,255,0.4); }
-          50%     { box-shadow: 0 4px 28px rgba(0,104,255,0.7), 0 0 0 12px rgba(0,104,255,0); }
-        }
-        @keyframes pulse-ring-blue {
-          0%   { transform: scale(1); opacity: 0.6; }
-          100% { transform: scale(1.7); opacity: 0; }
+          0%,85%,100% { transform: rotate(0deg) scale(1); }
+          87%  { transform: rotate(-12deg) scale(1.08); }
+          90%  { transform: rotate(10deg) scale(1.08); }
+          93%  { transform: rotate(-8deg) scale(1.04); }
+          96%  { transform: rotate(6deg) scale(1.02); }
+          98%  { transform: rotate(-3deg) scale(1); }
         }
         .float-zalo-btn {
-          animation: wobble-zalo 2.8s ease-in-out infinite, pulse-glow-blue 2.8s ease-in-out infinite;
-          position: relative;
+          animation: wobble-zalo 3s ease-in-out infinite;
+          filter: drop-shadow(0 4px 12px rgba(0,104,255,0.45));
         }
-        .float-zalo-btn::before,
-        .float-zalo-btn::after {
-          content: '';
-          position: absolute;
-          inset: 0;
-          border-radius: 50%;
-          border: 2px solid rgba(0,104,255,0.5);
-          animation: pulse-ring-blue 2.8s ease-out infinite;
-        }
-        .float-zalo-btn::after { animation-delay: 0.9s; }
         .float-zalo-btn:hover {
           animation-play-state: paused;
-          transform: scale(1.12) !important;
+          filter: drop-shadow(0 6px 18px rgba(0,104,255,0.65));
+          transform: scale(1.1);
         }
 
 
@@ -695,53 +678,25 @@ export default function LaPuraLanding() {
           bottom: 20,
           right: 20,
           zIndex: 9999,
-          width: 56,
-          height: 56,
-          borderRadius: "50%",
+          width: 60,
+          height: 60,
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          background: "#0068FF",
           textDecoration: "none",
-          color: "white",
-          overflow: "hidden",
         }}
         title="Chat Zalo OA Rever"
       >
-        {/* Logo Zalo chính thức */}
-        <svg
-          width="36"
-          height="36"
-          viewBox="0 0 240 240"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          {/* Bubble chat trắng */}
-          <path
-            d="M120 20C69.2 20 28 57.6 28 104C28 129.6 40.8 152.4 61.2 167.6L54 196L84 182.4C95.2 185.6 107.2 187.6 120 187.6C170.8 187.6 212 150 212 104C212 57.6 170.8 20 120 20Z"
-            fill="white"
-          />
-          {/* Chữ Z */}
-          <path
-            d="M82 82H140L82 130H140"
-            stroke="#0068FF"
-            strokeWidth="14"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-          {/* Chữ a */}
-          <path
-            d="M158 100C158 100 152 96 146 98C140 100 138 106 138 110C138 118 144 122 152 122C156 122 158 120 158 120V122H166V100H158ZM152 116C148 116 146 114 146 110C146 106 148 104 152 104C156 104 158 106 158 110C158 114 156 116 152 116Z"
-            fill="#0068FF"
-          />
-          {/* Chữ l */}
-          <path d="M172 84V122H180V84H172Z" fill="#0068FF" />
-          {/* Chữ o */}
-          <path
-            d="M195 98C187 98 182 103 182 110C182 117 187 122 195 122C203 122 208 117 208 110C208 103 203 98 195 98ZM195 116C191 116 190 113 190 110C190 107 191 104 195 104C199 104 200 107 200 110C200 113 199 116 195 116Z"
-            fill="#0068FF"
-          />
-        </svg>
+        <img
+          src="/images/logo-zalo.webp"
+          alt="Zalo"
+          style={{
+            width: 60,
+            height: 60,
+            objectFit: "contain",
+            display: "block",
+          }}
+        />
       </a>
 
       {/* NAVBAR */}
