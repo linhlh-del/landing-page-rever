@@ -19,7 +19,7 @@ const PRODUCTS = [
     nsa: "NSA: 41.52–49.86m²",
     tag: "Phổ biến",
     color: "#c8a96e",
-    floorPlan: "/images/can-ho-la-pu-ra-binh-duong-1pn.jpg",
+    floorPlan: "/images/can-ho-la-pu-ra-binh-duong-1pn.webp",
     features: [
       "View thành phố tầng cao",
       "Ban công xanh thoáng đãng",
@@ -34,7 +34,7 @@ const PRODUCTS = [
     nsa: "NSA: 55.54–57.49m²",
     tag: "Bán chạy",
     color: "#2e7d6b",
-    floorPlan: "/images/can-ho-la-pu-ra-binh-duong-2pn-1wc.jpg",
+    floorPlan: "/images/can-ho-la-pu-ra-binh-duong-2pn-1wc.webp",
     features: [
       "Phòng bếp mở liền phòng khách",
       "Ban công view hướng Đông",
@@ -49,7 +49,7 @@ const PRODUCTS = [
     nsa: "NSA: 58.98–69.96m²",
     tag: "Cao cấp",
     color: "#1a4b6e",
-    floorPlan: "/images/can-ho-la-pu-ra-binh-duong-2pn-2wc.jpg",
+    floorPlan: "/images/can-ho-la-pu-ra-binh-duong-2pn-2wc.webp",
     features: [
       "2 phòng tắm tiện lợi",
       "Không gian sinh hoạt rộng rãi",
@@ -76,42 +76,42 @@ const PRODUCTS = [
 
 const CONSTRUCTION = [
   {
-    src: "/images/tien-do-thi-cong-lapura-binh-duong.jpg",
+    src: "/images/tien-do-thi-cong-lapura-binh-duong.webp",
     label: "Mặt tiền Quốc lộ 13",
   },
   {
-    src: "/images/tien-do-thi-cong-lapura-binh-duong-2-1.jpg",
+    src: "/images/tien-do-thi-cong-lapura-binh-duong-2-1.webp",
     label: "Toàn cảnh công trường",
   },
   {
-    src: "/images/tien-do-thi-cong-lapura-binh-duong-3-1.jpg",
+    src: "/images/tien-do-thi-cong-lapura-binh-duong-3-1.webp",
     label: "Tiến độ thi công",
   },
 ];
 
 const SHOWROOM = [
   {
-    src: "/images/hinh-anh-nha-mau-la-pura-1-1.jpg",
+    src: "/images/hinh-anh-nha-mau-la-pura-1-1.webp",
     label: "Phòng Ngủ Master",
     desc: "Không gian ngủ cao cấp với cửa kính full-height view thành phố",
   },
   {
-    src: "/images/hinh-anh-nha-mau-la-pura-2-1.jpg",
+    src: "/images/hinh-anh-nha-mau-la-pura-2-1.webp",
     label: "Phòng Khách & Bếp",
     desc: "Không gian mở kết hợp phòng khách, bếp và ban công xanh",
   },
   {
-    src: "/images/hinh-anh-nha-mau-la-pura-3-1.jpg",
+    src: "/images/hinh-anh-nha-mau-la-pura-3-1.webp",
     label: "Phòng Khách",
     desc: "Thiết kế tối giản, sang trọng với tầm nhìn mở ra thiên nhiên",
   },
   {
-    src: "/images/hinh-anh-nha-mau-la-pura-4-1.jpg",
+    src: "/images/hinh-anh-nha-mau-la-pura-4-1.webp",
     label: "Nội Thất Tổng Thể",
     desc: "Bộ tứ không gian — phòng khách, bếp, ban công và nội thất hoàn thiện",
   },
   {
-    src: "/images/nha-mau-la-pu-ra-binh-duong-4.jpg",
+    src: "/images/nha-mau-la-pu-ra-binh-duong-4.webp",
     label: "Phòng Đọc / Làm Việc",
     desc: "Góc thư giãn đa năng với ánh sáng tự nhiên tràn vào",
   },
@@ -424,45 +424,45 @@ const AMENITIES = [
 
 const AMENITY_PHOTOS = [
   {
-    src: "/images/ho-boi-la-pura.jpg",
+    src: "/images/ho-boi-la-pura.webp",
     label: "Hồ Bơi La Pura",
     desc: "Hồ bơi vô cực trong nhà với vườn cây xanh bao quanh",
   },
   {
-    src: "/images/be-thuy-tri-lieu-zenia.jpg",
+    src: "/images/be-thuy-tri-lieu-zenia.webp",
     label: "Bể Thủy Trị Liệu Zenia",
     desc: "Không gian nghỉ dưỡng cao cấp với bể thủy trị liệu thiên nhiên",
   },
   {
-    src: "/images/tang-mai-la-pura.jpg",
+    src: "/images/tang-mai-la-pura.webp",
     label: "Tầng Mái La Pura",
     desc: "Khu vườn tầng mái xanh mát, không gian thư giãn đẳng cấp",
   },
   {
-    src: "/images/outdoor-terrace-la-pura.jpg",
+    src: "/images/outdoor-terrace-la-pura.webp",
     label: "Outdoor Terrace",
     desc: "Sân terrace ngoài trời với không gian gỗ tự nhiên và cây xanh",
   },
   {
-    src: "/images/khu-vui-choi-tre-em-la-pura.jpg",
+    src: "/images/khu-vui-choi-tre-em-la-pura.webp",
     label: "Khu Vui Chơi Trẻ Em",
     desc: "Sân chơi rộng lớn, an toàn và hiện đại cho trẻ em",
   },
 ];
 
 const FLOOR_PLANS = [
-  { label: "Tầng 4–10", file: "/images/mat-bang-zenia-tang-4-10.jpg" },
-  { label: "Tầng 11", file: "/images/mat-bang-zenia-tang-11.jpg" },
-  { label: "Tầng 12", file: "/images/mat-bang-zenia-tang-12.jpg" },
-  { label: "Tầng 13", file: "/images/mat-bang-zenia-tang-13.jpg" },
-  { label: "Tầng 14–16", file: "/images/mat-bang-zenia-tang-14-16.jpg" },
-  { label: "Tầng 17–18", file: "/images/mat-bang-zenia-tang-17-18.jpg" },
-  { label: "Tầng 19", file: "/images/mat-bang-zenia-tang-19.jpg" },
-  { label: "Tầng 21–25", file: "/images/mat-bang-zenia-tang-21-25.jpg" },
-  { label: "Tầng 26", file: "/images/mat-bang-zenia-tang-26.jpg" },
-  { label: "Tầng 27", file: "/images/mat-bang-zenia-tang-27.jpg" },
-  { label: "Tầng 28–30", file: "/images/mat-bang-zenia-tang-28-30.jpg" },
-  { label: "Tầng 31–39", file: "/images/mat-bang-zenia-tang-31-39.jpg" },
+  { label: "Tầng 4–10", file: "/images/mat-bang-zenia-tang-4-10.webp" },
+  { label: "Tầng 11", file: "/images/mat-bang-zenia-tang-11.webp" },
+  { label: "Tầng 12", file: "/images/mat-bang-zenia-tang-12.webp" },
+  { label: "Tầng 13", file: "/images/mat-bang-zenia-tang-13.webp" },
+  { label: "Tầng 14–16", file: "/images/mat-bang-zenia-tang-14-16.webp" },
+  { label: "Tầng 17–18", file: "/images/mat-bang-zenia-tang-17-18.webp" },
+  { label: "Tầng 19", file: "/images/mat-bang-zenia-tang-19.webp" },
+  { label: "Tầng 21–25", file: "/images/mat-bang-zenia-tang-21-25.webp" },
+  { label: "Tầng 26", file: "/images/mat-bang-zenia-tang-26.webp" },
+  { label: "Tầng 27", file: "/images/mat-bang-zenia-tang-27.webp" },
+  { label: "Tầng 28–30", file: "/images/mat-bang-zenia-tang-28-30.webp" },
+  { label: "Tầng 31–39", file: "/images/mat-bang-zenia-tang-31-39.webp" },
 ];
 
 // Zalo SDK đã bị loại bỏ — dùng custom button trực tiếp
@@ -578,23 +578,68 @@ export default function LaPuraLanding() {
           transform: scale(1.12) !important;
         }
 
-        /* Custom Zalo floating button - hiệu ứng rung */
-        @keyframes wobble-zalo {
-          0%,85%,100% { transform: rotate(0deg) scale(1); }
-          87%  { transform: rotate(-12deg) scale(1.08); }
-          90%  { transform: rotate(10deg) scale(1.08); }
-          93%  { transform: rotate(-8deg) scale(1.04); }
-          96%  { transform: rotate(6deg) scale(1.02); }
-          98%  { transform: rotate(-3deg) scale(1); }
+        /* Custom Zalo floating button */
+        @keyframes zalo-shake {
+          0%,100% { transform: rotate(0deg); }
+          10%     { transform: rotate(-6deg); }
+          20%     { transform: rotate(6deg); }
+          30%     { transform: rotate(-5deg); }
+          40%     { transform: rotate(5deg); }
+          50%     { transform: rotate(-3deg); }
+          60%     { transform: rotate(3deg); }
+          70%     { transform: rotate(-1deg); }
+          80%     { transform: rotate(1deg); }
+        }
+        @keyframes zalo-ring-1 {
+          0%   { transform: scale(1);   opacity: 0.6; }
+          100% { transform: scale(2.2); opacity: 0; }
+        }
+        @keyframes zalo-ring-2 {
+          0%   { transform: scale(1);   opacity: 0.45; }
+          100% { transform: scale(2.8); opacity: 0; }
+        }
+        @keyframes zalo-ring-3 {
+          0%   { transform: scale(1);   opacity: 0.3; }
+          100% { transform: scale(3.4); opacity: 0; }
         }
         .float-zalo-btn {
-          animation: wobble-zalo 3s ease-in-out infinite;
-          filter: drop-shadow(0 4px 12px rgba(0,104,255,0.45));
+          animation: zalo-shake 1.6s ease-in-out infinite;
+          filter: drop-shadow(0 3px 10px rgba(0,104,255,0.4));
+          position: relative;
+        }
+        .float-zalo-btn::before,
+        .float-zalo-btn::after {
+          content: "";
+          position: absolute;
+          inset: 0;
+          border-radius: 50%;
+          background: rgba(0, 104, 255, 0.25);
+          animation: zalo-ring-1 2s ease-out infinite;
+          pointer-events: none;
+        }
+        .float-zalo-btn::after {
+          background: rgba(0, 104, 255, 0.15);
+          animation: zalo-ring-2 2s ease-out infinite;
+          animation-delay: 0.5s;
+        }
+        .float-zalo-ring3 {
+          position: absolute;
+          inset: 0;
+          border-radius: 50%;
+          background: rgba(0, 104, 255, 0.1);
+          animation: zalo-ring-3 2s ease-out infinite;
+          animation-delay: 1s;
+          pointer-events: none;
         }
         .float-zalo-btn:hover {
           animation-play-state: paused;
-          filter: drop-shadow(0 6px 18px rgba(0,104,255,0.65));
-          transform: scale(1.1);
+          filter: drop-shadow(0 5px 16px rgba(0,104,255,0.6));
+          transform: scale(1.08);
+        }
+        .float-zalo-btn:hover::before,
+        .float-zalo-btn:hover::after,
+        .float-zalo-btn:hover .float-zalo-ring3 {
+          animation-play-state: paused;
         }
 
 
@@ -675,11 +720,11 @@ export default function LaPuraLanding() {
         className="float-zalo-btn"
         style={{
           position: "fixed",
-          bottom: 20,
-          right: 20,
+          bottom: 24,
+          right: 22,
           zIndex: 9999,
-          width: 60,
-          height: 60,
+          width: 50,
+          height: 50,
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
@@ -687,14 +732,19 @@ export default function LaPuraLanding() {
         }}
         title="Chat Zalo OA Rever"
       >
+        <div className="float-zalo-ring3" />
         <img
           src="/images/logo-zalo.webp"
           alt="Zalo"
+          loading="eager"
+          decoding="async"
           style={{
-            width: 60,
-            height: 60,
+            width: 50,
+            height: 50,
             objectFit: "contain",
             display: "block",
+            position: "relative",
+            zIndex: 1,
           }}
         />
       </a>
@@ -757,23 +807,6 @@ export default function LaPuraLanding() {
             ))}
           </div>
           <div style={{ display: "flex", alignItems: "center", gap: 18 }}>
-            <a
-              href="https://zalo.me/0877191940"
-              target="_blank"
-              rel="noreferrer"
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: 6,
-                fontFamily: "'Outfit',sans-serif",
-                fontSize: 12,
-                color: "#4da8ff",
-                textDecoration: "none",
-                fontWeight: 600,
-              }}
-            >
-              <SvgZaloNav /> <span className="hide-mobile">Zalo</span>
-            </a>
             <a
               href="tel:0877191940"
               style={{
@@ -1206,6 +1239,8 @@ export default function LaPuraLanding() {
                   }}
                 >
                   <img
+                    loading="lazy"
+                    decoding="async"
                     src={c.src}
                     alt={c.label}
                     style={{
@@ -1314,6 +1349,8 @@ export default function LaPuraLanding() {
               }}
             >
               <img
+                loading="lazy"
+                decoding="async"
                 key={activeShowroom}
                 src={SHOWROOM[activeShowroom].src}
                 alt={SHOWROOM[activeShowroom].label}
@@ -1424,6 +1461,8 @@ export default function LaPuraLanding() {
                 }}
               >
                 <img
+                  loading="lazy"
+                  decoding="async"
                   src={s.src}
                   alt={s.label}
                   style={{
@@ -1826,6 +1865,8 @@ export default function LaPuraLanding() {
                     }}
                   >
                     <img
+                      loading="lazy"
+                      decoding="async"
                       src={p.floorPlan}
                       alt={p.type}
                       style={{
@@ -2070,6 +2111,8 @@ export default function LaPuraLanding() {
             }}
           >
             <img
+              loading="lazy"
+              decoding="async"
               src={lightbox.src}
               alt={lightbox.label}
               style={{
@@ -2207,6 +2250,8 @@ export default function LaPuraLanding() {
               }
             >
               <img
+                loading="lazy"
+                decoding="async"
                 src={FLOOR_PLANS[activeFloor].file}
                 alt={FLOOR_PLANS[activeFloor].label}
                 style={{
@@ -2643,6 +2688,8 @@ export default function LaPuraLanding() {
                   }}
                 >
                   <img
+                    loading="lazy"
+                    decoding="async"
                     src={photo.src}
                     alt={photo.label}
                     style={{
